@@ -1,5 +1,8 @@
 package util;
 
+import org.postgresql.ds.PGSimpleDataSource;
+
+import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -17,5 +20,14 @@ public class ConexionBD {
             conex = DriverManager.getConnection(URL, USUARIO, CLAVE);
         }
         return conex;
+    }
+
+    public static Connection getDataSource() throws SQLException {
+        PGSimpleDataSource ps = new PGSimpleDataSource();
+        ps.setServerName("localhost");
+        ps.setDatabaseName("jardineria");
+        ps.setUser("jardinero");
+        ps.setPassword("jardinero");
+        return ((DataSource) ps).getConnection();
     }
 }
